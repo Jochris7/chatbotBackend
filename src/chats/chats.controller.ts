@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  //Patch,
   Param,
   Delete,
   HttpCode,
@@ -11,7 +10,6 @@ import {
 } from '@nestjs/common';
 import { ChatsService } from './chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
-//import { UpdateChatDto } from './dto/update-chat.dto';
 
 @Controller('chats')
 export class ChatsController {
@@ -29,18 +27,14 @@ export class ChatsController {
     return this.chatsService.findAll();
   }
 
-  /*@Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.chatsService.findOne(+id);
-  }*/
-
-  /*
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateChatDto: UpdateChatDto) {
-    return this.chatsService.update(+id, updateChatDto);
-  }*/
+  @Delete('all')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  removeAll() {
+    return this.chatsService.removeAll();
+  }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string) {
     return this.chatsService.remove(+id);
   }
